@@ -1,0 +1,26 @@
+random <- function(x){
+# Returns 20 random rows from data frame
+  s=sample(nrow(x), 10)
+  return(x[s,])
+}
+
+create_bucket <- function(x, names=c('lower', 'higher'), q=3){
+  if(is.numeric(x)){
+    cutoff <- quantile(x, na.rm=T)[q]
+    res <- character(length(x))
+    res[1:length(res)] <- 'Unknown'
+    res[which(x<cutoff)] <- names[1]
+    res[which(x>=cutoff)] <- names[2]
+    res <- as.factor(res)
+    return(res)
+  } else if (is.character(x)){
+    tbl <- as.data.frame(table(x))
+    tbl <- tbl[order(tbl[,2]),]
+    n <- nrow(tbl)
+    m <- max(n-5, 1)
+    tbl <- tbl[m:n,]
+    x[-which(x %in% tbl[,1])] <- 'Other'
+    res <-factor(x)
+    return(res)
+  }
+}
