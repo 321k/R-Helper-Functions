@@ -1,2 +1,2 @@
 # R-Helper-Functions
-My helper functions for R
+My helper functions for R.
