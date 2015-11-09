@@ -24,3 +24,16 @@ create_bucket <- function(x, names=c('lower', 'higher'), q=3){
     return(res)
   }
 }
+
+classes <- function(x, classes=NA){
+  if(length(classes) == ncol(x)){
+    for(i in 1:ncol(x)){
+      if(classes[i] == 'factor') x[,i] <- as.factor(x[,i])
+      if(classes[i] == 'numeric') x[,i] <- as.numeric(as.character(x[,i]))
+      if(classes[i] == 'date') x[,i] <- as.Date(as.character(x[,i]))
+    }
+    return(x)
+  } else {
+  for(i in 1:ncol(x)) print(class(x[,i]))
+  }
+}
