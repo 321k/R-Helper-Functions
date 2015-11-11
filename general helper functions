@@ -26,6 +26,7 @@ create_bucket <- function(x, names=c('lower', 'higher'), q=3){
 }
 
 classes <- function(x, classes=NA){
+  x <- as.data.frame(x)
   if(length(classes) == ncol(x)){
     for(i in 1:ncol(x)){
       if(classes[i] == 'factor') x[,i] <- as.factor(x[,i])
